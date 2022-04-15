@@ -1,0 +1,17 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+code --install-extension eamodio.gitlens
+code --install-extension HashiCorp.terraform
+code --install-extension golang.Go
+code --install-extension ms-python.python
+code --install-extension aaron-bond.better-comments
+code --install-extension christian-kohler.path-intellisense
+code --install-extension esbenp.prettier-vscode
+code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
+code --install-extension johnpapa.vscode-peacock
+code --install-extension streetsidesoftware.code-spell-checker
+code --install-extension wayou.vscode-todo-highlight
+code --install-extension vscode-icons-team.vscode-icons
+code --install-extension chrmarti.regex
+{{- end }}

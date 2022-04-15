@@ -1,0 +1,62 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+dock_manager ()
+{
+    ITEM_NAME="$1"
+    ITEM_PATH="$2"
+    POSITION=$3
+    REGEX="^.*slot (.*) in.*"
+    dockutil --find "$ITEM_NAME" > /dev/null 2>&1
+
+
+    if [[ $? -eq 1 ]] 
+    then
+        # Item needs adding
+        dockutil --add $ITEM_PATH
+    fi
+    if [[ -n $POSITION ]]
+    then
+        # run again here incase it has been added
+        find=$(dockutil --find "$ITEM_NAME")
+
+        if [[ $find =~ $REGEX ]]
+        then
+            
+            current_position="${BASH_REMATCH[1]}"
+            if [[ $POSITION != $current_position ]]
+            then
+                update=1
+                echo "$ITEM_NAME will be moved from  $current_position to $POSITION"
+            fi
+        else
+            update=1
+        fi
+
+        if [[ -n $update ]]
+        then
+        dockutil --move "$ITEM_NAME" --position $POSITION
+        fi
+    else 
+    echo "info: No Position set for $ITEM_NAME, ignoring"
+    fi 
+}
+
+{{ if not .iswork }}
+dock_manager "Firefox" "/Applications/Firefox.app" "1"
+{{- else }}
+dock_manager "Google Chrome" "/Applications/Google Chrome.app" "1"
+{{- end }}
+dock_manager "Visual Studio Code" "/Applications/Visual Studio Code.app" "2"
+dock_manager "iTerm" "/Applications/iTerm.app" "3"
+dock_manager "Slack" "/Applications/Slack.app" "4"
+{{ if not .iswork }}
+dock_manager "1Password" "/Applications/1Password.app" "5"
+dock_manager "Steam" "/Applications/Steam.app" "6"
+dock_manager "Notion" "/Applications/Notion.app" "7"
+{{- else }}
+dock_manager "draw.io" "/Applications/draw.io.app" "5"
+dock_manager "Miro" "/Applications/Miro.app" "6"
+{{- end }}
+dock_manager "Docker" "/Applications/Docker.app" "8"
+{{ end -}}

@@ -1,0 +1,18 @@
+{{- $iswork := false }}
+{{- if eq .chezmoi.username "jasonfield" }}
+{{- $iswork = true }}
+{{- end }}
+
+{{- $email := "" -}}
+{{- if (hasKey . "email") -}}
+  {{-   $email = .email -}}
+{{- else -}}
+  {{-   $email = promptString "email" -}}
+{{- end -}}
+
+[data]
+  iswork = {{ $iswork }}
+  email = {{ $email }}
+[sourceVCS]
+  autoCommit = true
+  autoPush = true

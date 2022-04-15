@@ -1,0 +1,41 @@
+[user]
+  name = Jason Field
+  email = {{ .email }}
+[color]
+  ui = auto
+[core]
+  # Don't paginate output by default
+  pager = cat
+  # Don't consider trailing space change as a cause for merge conflicts
+  whitespace = -trailing-space
+[diff]
+  # Use better, descriptive initials (c, i, w) instead of a/b.
+  mnemonicPrefix = true
+  # Show renames/moves as such
+  renames = true
+  # When using --word-diff, assume --word-diff-regex=.
+  wordRegex = .
+  # Display submodule-related information (commit listings)
+  submodule = log
+[push]
+  # Default push should only push the current branch to its push target, regardless of its remote name
+  default = upstream
+[color "branch"]
+  # Blue on black is hard to read in git branch -vv: use cyan instead
+  upstream = cyan
+[tag]
+  # Sort tags as version numbers whenever applicable, so 1.10.2 is AFTER 1.2.0.
+  sort = version:refname
+[versionsort]
+  prereleaseSuffix = -pre
+  prereleaseSuffix = .pre
+  prereleaseSuffix = -beta
+  prereleaseSuffix = .beta
+  prereleaseSuffix = -rc
+  prereleaseSuffix = .rc
+[init]
+{{- if .iswork}}
+  defaultBranch = master
+{{- else }}
+  defaultBranch = main
+{{- end }}

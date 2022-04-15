@@ -1,0 +1,40 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+set -eufo pipefail
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+brew "dockutil"
+brew "coreutils"
+brew "direnv" 
+brew "git"
+brew "go"
+brew "jq"
+brew "pre-commit"
+brew "awscli"
+brew "aws-vault"
+brew "dive"
+brew "terraform"
+brew "terraform-docs"
+brew "terragrunt"
+cask "drawio"
+cask "docker"
+cask "iterm2"
+cask "visual-studio-code"
+cask "rectangle"
+cask "slack"
+{{- if not .iswork }}
+cask "1password-cli"
+cask "1password"
+cask "steam"
+cask "firefox"
+cask "notion"
+{{- end }}
+{{- if .iswork }}
+cask "lastpass"
+cask "google-chrome"
+cask "miro"
+{{- end }}
+EOF
+brew tap homebrew/autoupdate
+{{ end -}}
