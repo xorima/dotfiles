@@ -2,4 +2,3 @@ alias ls="ls -la"
 alias vi="vim"
 
 alias chez="chezmoi"
-

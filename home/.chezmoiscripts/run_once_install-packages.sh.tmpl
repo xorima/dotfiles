@@ -37,4 +37,6 @@ cask "miro"
 {{- end }}
 EOF
 brew tap homebrew/autoupdate
+brew remove terraform --ignore-dependencies
+brew install tfenv
 {{ end -}}
