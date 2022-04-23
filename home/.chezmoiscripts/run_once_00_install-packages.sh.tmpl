@@ -14,7 +14,7 @@ brew "pre-commit"
 brew "awscli"
 brew "aws-vault"
 brew "dive"
-brew "terraform"
+brew "tfenv"
 brew "terraform-docs"
 brew "terragrunt"
 cask "drawio"
@@ -23,12 +23,13 @@ cask "iterm2"
 cask "visual-studio-code"
 cask "rectangle"
 cask "slack"
+cask "notion"
 {{- if not .iswork }}
-cask "1password-cli"
-cask "1password"
+# cask "1password-cli" # using beta which is manual install atm
+# cask "1password"
 cask "steam"
 cask "firefox"
-cask "notion"
+cask "ngrok"
 {{- end }}
 {{- if .iswork }}
 cask "lastpass"
@@ -37,6 +38,4 @@ cask "miro"
 {{- end }}
 EOF
 brew tap homebrew/autoupdate
-brew remove terraform --ignore-dependencies
-brew install tfenv
 {{ end -}}
