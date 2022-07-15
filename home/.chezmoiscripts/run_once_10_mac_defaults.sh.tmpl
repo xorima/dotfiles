@@ -11,7 +11,7 @@ defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 defaults write com.apple.finder NewWindowTarget -string "PfHm"
-
+defaults write com.apple.finder ShowRecentTags -bool false
 
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
@@ -21,5 +21,15 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/.config/iterm2/prefs"
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -integer 1
+
+defaults write com.apple.screencapture type jpg
+
+# Disable hot corners
+defaults write com.apple.dock wvous-tl-corner -int 0
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-br-corner -int 0
+
+killall Dock
 
 {{- end }}
