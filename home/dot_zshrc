@@ -19,6 +19,9 @@ plugins=(
   docker
   golang
   terraform
+  zsh-aws-vault
+  kubectl
+  kubectx
 )
 
 source $ZSH/oh-my-zsh.sh

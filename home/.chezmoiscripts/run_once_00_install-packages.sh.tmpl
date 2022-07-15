@@ -16,9 +16,7 @@ brew "aws-vault"
 brew "dive"
 brew "tfenv"
 brew "terraform-docs"
-brew "terragrunt" --ignore-dependencies
 brew "pyenv"
-brew "tfenv"
 cask "drawio"
 cask "docker"
 cask "iterm2"
@@ -26,7 +24,9 @@ cask "visual-studio-code"
 cask "rectangle"
 cask "slack"
 cask "notion"
+cask "goland"
 {{- if not .iswork }}
+cask "zoom"
 # cask "1password-cli" # using beta which is manual install atm
 # cask "1password"
 cask "steam"
@@ -41,3 +41,7 @@ cask "miro"
 EOF
 brew tap homebrew/autoupdate
 {{ end -}}
+
+brew unlink tfenv
+brew install terragrunt --ignore-dependencies
+brew link tfenv

@@ -1,6 +1,6 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
-
+alias python=python3
 dock_manager ()
 {
     ITEM_NAME="$1"
@@ -41,22 +41,23 @@ dock_manager ()
     echo "info: No Position set for $ITEM_NAME, ignoring"
     fi 
 }
-
+# Disabled until dockutil 3 is available on homebrew
 {{ if not .iswork }}
-dock_manager "Firefox" "/Applications/Firefox.app" "1"
+# dock_manager "Firefox" "/Applications/Firefox.app" "1"
 {{- else }}
-dock_manager "Google Chrome" "/Applications/Google Chrome.app" "1"
+# dock_manager "Google Chrome" "/Applications/Google Chrome.app" "1"
 {{- end }}
-dock_manager "Visual Studio Code" "/Applications/Visual Studio Code.app" "2"
-dock_manager "iTerm" "/Applications/iTerm.app" "3"
-dock_manager "Slack" "/Applications/Slack.app" "4"
+# dock_manager "GoLand" "/Applications/GoLand" "2"
+# dock_manager "Visual Studio Code" "/Applications/Visual Studio Code.app" "3"
+# dock_manager "iTerm" "/Applications/iTerm.app" "4"
+# dock_manager "Slack" "/Applications/Slack.app" "5"
 {{ if not .iswork }}
-dock_manager "1Password" "/Applications/1Password.app" "5"
-dock_manager "Steam" "/Applications/Steam.app" "6"
-dock_manager "Notion" "/Applications/Notion.app" "7"
+# dock_manager "1Password" "/Applications/1Password.app" "6"
+# dock_manager "Steam" "/Applications/Steam.app" "7"
+# dock_manager "Notion" "/Applications/Notion.app" "8"
 {{- else }}
-dock_manager "draw.io" "/Applications/draw.io.app" "5"
-dock_manager "Miro" "/Applications/Miro.app" "6"
+# dock_manager "draw.io" "/Applications/draw.io.app" "6"
+# dock_manager "Miro" "/Applications/Miro.app" "7"
 {{- end }}
-dock_manager "Docker" "/Applications/Docker.app" "8"
+# dock_manager "Docker" "/Applications/Docker.app" "9"
 {{ end -}}
