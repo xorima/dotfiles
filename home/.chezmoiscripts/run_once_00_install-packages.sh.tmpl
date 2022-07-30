@@ -31,8 +31,8 @@ cask "pycharm"
 cask "rubymine"
 {{- if not .iswork }}
 cask "zoom"
-# cask "1password-cli" # using beta which is manual install atm
-# cask "1password"
+cask "1password-cli" # using beta which is manual install atm
+cask "1password"
 cask "steam"
 cask "firefox"
 cask "ngrok"
@@ -46,6 +46,8 @@ EOF
 brew tap homebrew/autoupdate
 {{ end -}}
 
+{{ if .iswork }}
 brew unlink tfenv
 brew install terragrunt --ignore-dependencies
 brew link tfenv
+{{ end -}}
