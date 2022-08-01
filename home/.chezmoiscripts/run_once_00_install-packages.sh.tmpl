@@ -3,6 +3,9 @@
 
 set -eufo pipefail
 
+brew tap homebrew/cask-drivers
+brew tap homebrew/autoupdate
+
 brew bundle --no-lock --file=/dev/stdin <<EOF
 brew "dockutil"
 brew "coreutils"
@@ -29,6 +32,7 @@ cask "intellij-idea"
 cask "datagrip"
 cask "pycharm"
 cask "rubymine"
+cask "logitech-options"
 {{- if not .iswork }}
 cask "zoom"
 cask "1password-cli" # using beta which is manual install atm
@@ -43,11 +47,11 @@ cask "google-chrome"
 cask "miro"
 {{- end }}
 EOF
-brew tap homebrew/autoupdate
-{{ end -}}
 
-{{ if .iswork }}
+{{- if .iswork }}
 brew unlink tfenv
 brew install terragrunt --ignore-dependencies
 brew link tfenv
+{{- end }}
+
 {{ end -}}
