@@ -40,18 +40,9 @@ cask "1password"
 cask "steam"
 cask "firefox"
 cask "ngrok"
-{{- end }}
-{{- if .iswork }}
-cask "lastpass"
-cask "google-chrome"
-cask "miro"
+cask "citrix-workspace:
 {{- end }}
 EOF
 
-{{- if .iswork }}
-brew unlink tfenv
-brew install terragrunt --ignore-dependencies
-brew link tfenv
-{{- end }}
 
 {{ end -}}
