@@ -7,7 +7,6 @@ brew tap homebrew/cask-drivers
 brew tap homebrew/autoupdate
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
-brew "dockutil"
 brew "coreutils"
 brew "direnv" 
 brew "git"
@@ -23,6 +22,8 @@ brew "pyenv"
 brew "kubectl"
 brew "helm" 
 brew "argocd"
+brew "htop"
+brew "tree"
 cask "drawio"
 cask "docker"
 cask "iterm2"
@@ -32,20 +33,19 @@ cask "slack"
 cask "notion"
 cask "goland"
 cask "intellij-idea"
-cask "datagrip"
 cask "pycharm"
-cask "rubymine"
-cask "logitech-options"
-{{- if not .iswork }}
 cask "zoom"
-cask "1password-cli" # using beta which is manual install atm
+cask "1password-cli"
 cask "1password"
 cask "steam"
 cask "firefox"
 cask "ngrok"
-cask "citrix-workspace:
-{{- end }}
+cask "citrix-workspace"
 EOF
 
+DLURL=$(curl --silent "https://api.github.com/repos/kcrawford/dockutil/releases/latest" | jq -r '.assets[].browser_download_url' | grep pkg)
+curl -sL ${DLURL} -o /tmp/dockutil.pkg
+sudo installer -pkg "/tmp/dockutil.pkg" -target /
+rm /tmp/dockutil.pkg
 
 {{ end -}}
