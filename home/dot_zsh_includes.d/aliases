@@ -1,13 +1,6 @@
 alias ls="ls -la"
 alias vi="vim"
-alias nano="vim"
 
 alias chez="chezmoi"
 alias k="kubectl"
-alias tf="terraform"
-alias "tf fmt"="terraform fmt -recursive"
-alias "terraform fmt"="terraform fmt -recursive"
-alias tg="terragrunt"
-alias "tg fmt"="terragrunt fmt -recursive"
-alias "terragrunt fmt"="terragrunt fmt -recursive"
 
