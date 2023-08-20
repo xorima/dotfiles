@@ -1,5 +1,6 @@
 alias ls="ls -la"
 alias vi="vim"
+alias nano="vim"
 
 alias chez="chezmoi"
 alias k="kubectl"
