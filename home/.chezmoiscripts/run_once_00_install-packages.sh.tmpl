@@ -3,7 +3,6 @@
 
 set -eufo pipefail
 
-brew tap homebrew/cask-drivers
 brew tap homebrew/autoupdate
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
@@ -37,6 +36,8 @@ brew "terraform-docs"
 brew "tfenv"
 brew "tree"
 brew "virtualenv"
+brew "z"
+brew "fzf"
 
 cask "1password"
 cask "1password-cli"
