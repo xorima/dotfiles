@@ -1,0 +1,9 @@
+# Check if podman completion script exists
+if [ -f "$(brew --prefix)/share/zsh/site-functions/_podman" ]; then
+    # Source the completion script
+    source "$(brew --prefix)/share/zsh/site-functions/_podman"
+else
+    echo "Podman completion script not found. Please install it."
+fi
+
+alias docker=podman

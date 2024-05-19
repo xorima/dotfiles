@@ -20,6 +20,9 @@ plugins=(
   kubectl
   kubectx
   z
+  zoxide
+  vscode
+  podman
   fzf
 )
 
