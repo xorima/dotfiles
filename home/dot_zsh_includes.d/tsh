@@ -1,0 +1,7 @@
+function tsh_login() {
+    local server_name=$1
+    local cluster_name=$2
+
+    tsh login --proxy="${server_name}:443" ${server_name}
+    tsh kube login ${cluster_name}
+}

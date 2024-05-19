@@ -1,1 +1,1 @@
-alias nano="vim"
+alias nano="echo use vim"

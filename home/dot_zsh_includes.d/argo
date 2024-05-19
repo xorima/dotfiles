@@ -1,0 +1,6 @@
+alias argo="argocd"
+
+function argo_login_sso() {
+    local server_name=$1
+    argocd login ${server_name} --sso
+}
