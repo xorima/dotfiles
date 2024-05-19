@@ -11,6 +11,8 @@ brew "argocd"
 brew "autoconf"
 brew "aws-vault"
 brew "awscli"
+brew "bat"
+brew "git-delta"
 brew "chezmoi"
 brew "coreutils"
 brew "direnv"
@@ -37,14 +39,17 @@ brew "tfenv"
 brew "tree"
 brew "virtualenv"
 brew "z"
+brew "zoxide"
 brew "fzf"
+brew "podman"
+brew "dockutil"
 
 cask "1password"
 cask "1password-cli"
 cask "citrix-workspace"
 cask "datagrip"
 cask "discord"
-cask "docker"
+cask "podman-desktop"
 cask "drawio"
 cask "firefox"
 cask "goland"
@@ -65,10 +70,5 @@ cask "unetbootin"
 cask "visual-studio-code"
 cask "zoom"
 EOF
-
-DLURL=$(curl --silent "https://api.github.com/repos/kcrawford/dockutil/releases/latest" | jq -r '.assets[].browser_download_url' | grep pkg)
-curl -sL ${DLURL} -o /tmp/dockutil.pkg
-sudo installer -pkg "/tmp/dockutil.pkg" -target /
-rm /tmp/dockutil.pkg
 
 {{ end -}}

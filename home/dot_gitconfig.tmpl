@@ -4,11 +4,19 @@
 [color]
   ui = auto
 [core]
-  # Don't paginate output by default
-  pager = cat
+  pager = delta
   # Don't consider trailing space change as a cause for merge conflicts
   whitespace = -trailing-space
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    line-numbers = true
+    side-by-side = true
+[merge]
+    conflictstyle = diff3
 [diff]
+  colorMoved = default
   # Use better, descriptive initials (c, i, w) instead of a/b.
   mnemonicPrefix = true
   # Show renames/moves as such
