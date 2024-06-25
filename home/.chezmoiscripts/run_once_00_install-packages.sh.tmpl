@@ -6,6 +6,7 @@ set -eufo pipefail
 brew tap homebrew/autoupdate
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
+cask "docker"
 brew "ansible"
 brew "gnupg"
 brew "argocd"
@@ -42,7 +43,6 @@ brew "virtualenv"
 brew "z"
 brew "zoxide"
 brew "fzf"
-brew "podman"
 brew "dockutil"
 
 cask "1password"
@@ -50,7 +50,6 @@ cask "1password-cli"
 cask "citrix-workspace"
 cask "datagrip"
 cask "discord"
-cask "podman-desktop"
 cask "drawio"
 cask "firefox"
 cask "goland"
