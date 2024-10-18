@@ -1,6 +1,7 @@
 [user]
   name = Jason Field
   email = {{ .email }}
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA0T5nkREq3PRi+uSO+FTba1VQsHRMgl6k9i8jtFPEba
 [color]
   ui = auto
 [core]
@@ -53,3 +54,9 @@
   gsl = shortlog
 [url "ssh://git@github.com/"]
   insteadOf = "https://github.com/"
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[commit]
+  gpgsign = true
