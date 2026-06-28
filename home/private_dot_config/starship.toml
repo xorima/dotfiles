@@ -1,0 +1,79 @@
+add_newline = false
+command_timeout = 1000
+
+format = """
+$directory$git_branch$git_status$python$golang$java$kotlin$kubernetes$terraform$fill
+$line_break$status$character
+"""
+
+# move the rest of the prompt to the right
+right_format = """$docker_context$memory_usage$cmd_duration"""
+
+[fill]
+symbol = ""
+
+[docker_context]
+format = '[🐋 $context](blue bold) '
+only_with_files = true
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold cyan)"
+
+[directory]
+style = "bold blue"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+symbol = " "
+style = "bold yellow"
+
+[git_status]
+format = '$all_status$ahead_behind '
+ahead = '[⬆](bold purple) '
+behind = '[⬇](bold purple) '
+staged = '[✚](green) '
+deleted = '[✖](red) '
+renamed = '[➜](purple) '
+stashed = '[✭](cyan) '
+untracked = '[◼](white) '
+modified = '[✱](blue) '
+conflicted = '[═](yellow) '
+diverged = '⇕ '
+up_to_date = ''
+style = "bold red"
+
+[python]
+format = '[(\($virtualenv\) )]($style)'
+style = 'white'
+
+
+[kubernetes]
+format = "on [$context]($style) "
+style = "bold cyan"
+
+[terraform]
+format = "via [$workspace]($style) "
+style = "bold magenta"
+
+[cmd_duration]
+format = '([$duration]($style)) '
+
+[status]
+disabled = false
+format = "[$symbol$status]($style) "
+style = "bold red"
+symbol = "✖ "
+
+[golang]
+format = '[🚀 $version](bold cyan) '
+
+[os]
+disabled = false
+
+[memory_usage]
+disabled = false
+threshold = 90
+style = 'bold dimmed green'

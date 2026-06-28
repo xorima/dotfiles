@@ -1,1 +1,199 @@
-alias gsl="git shortlog"
+autoload -Uz is-at-least
+
+git_current_branch() {
+	command git symbolic-ref --quiet --short HEAD 2> /dev/null \
+		|| command git describe --contains --all HEAD 2> /dev/null \
+		|| command git rev-parse --short HEAD 2> /dev/null
+}
+
+git_develop_branch() {
+	command git rev-parse --git-dir &> /dev/null || return
+
+	local branch
+	for branch in dev devel develop development; do
+		if command git show-ref -q --verify refs/heads/$branch; then
+			echo $branch
+			return 0
+		fi
+	done
+
+	echo develop
+	return 1
+}
+
+git_main_branch() {
+	command git rev-parse --git-dir &> /dev/null || return
+
+	local branch
+	for branch in main trunk mainline default stable master; do
+		if command git show-ref -q --verify refs/heads/$branch \
+			|| command git show-ref -q --verify refs/remotes/origin/$branch \
+			|| command git show-ref -q --verify refs/remotes/upstream/$branch; then
+			echo $branch
+			return 0
+		fi
+	done
+
+	echo main
+}
+
+alias g='git'
+alias ga='git add'
+alias gaa='git add --all'
+alias gapa='git add --patch'
+alias gau='git add --update'
+alias gav='git add --verbose'
+alias gam='git am'
+alias gama='git am --abort'
+alias gamc='git am --continue'
+alias gams='git am --skip'
+alias gamscp='git am --show-current-patch'
+alias gap='git apply'
+alias gapt='git apply --3way'
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbd='git branch --delete'
+alias gbD='git branch --delete --force'
+alias gbm='git branch --move'
+alias gbnm='git branch --no-merged'
+alias gbr='git branch --remote'
+alias gbs='git bisect'
+alias gbsb='git bisect bad'
+alias gbsg='git bisect good'
+alias gbsn='git bisect new'
+alias gbso='git bisect old'
+alias gbsr='git bisect reset'
+alias gbss='git bisect start'
+alias gca='git commit --verbose --all'
+alias gca!='git commit --verbose --all --amend'
+alias gcan='git commit --verbose --all --no-edit'
+alias gcan!='git commit --verbose --all --no-edit --amend'
+alias gc='git commit --verbose'
+alias gc!='git commit --verbose --amend'
+alias gcf='git config --list'
+alias gcfu='git commit --fixup'
+alias gcm='git checkout $(git_main_branch)'
+alias gcn='git commit --verbose --no-edit'
+alias gcn!='git commit --verbose --no-edit --amend'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gcB='git checkout -B'
+alias gcpa='git cherry-pick --abort'
+alias gcpc='git cherry-pick --continue'
+alias gcp='git cherry-pick'
+alias gd='git diff'
+alias gdca='git diff --cached'
+alias gdcw='git diff --cached --word-diff'
+alias gds='git diff --staged'
+alias gdw='git diff --word-diff'
+alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
+alias gfa='git fetch --all --tags --prune'
+alias gf='git fetch'
+alias gfo='git fetch origin'
+alias gg='git gui citool'
+alias gga='git gui citool --amend'
+alias ggl='git pull origin $(git_current_branch)'
+alias ggp='git push origin $(git_current_branch)'
+alias ggpnp='ggl && ggp'
+alias ggpur='ggu'
+alias ggu='git pull --rebase origin $(git_current_branch)'
+alias ggpush='git push origin "$(git_current_branch)"'
+alias ggpull='git pull origin "$(git_current_branch)"'
+alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
+alias ggsupf='git push --set-upstream origin $(git_current_branch) --force-with-lease'
+alias gl='git pull'
+alias glo='git log --oneline --decorate'
+alias glg='git log --stat'
+alias glgg='git log --graph'
+alias glgga='git log --graph --decorate --all'
+alias glgm='git log --graph --max-count=10'
+alias glgp='git log --stat --patch'
+alias glgl='git pull origin $(git_current_branch)'
+alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
+alias glols='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --stat'
+alias gloga='git log --oneline --decorate --graph --all'
+alias glod='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset"'
+alias glods='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset" --date=short'
+alias glp='git log --pretty=<format>'
+alias gma='git merge --abort'
+alias gmc='git merge --continue'
+alias gm='git merge'
+alias gmff='git merge --ff-only'
+alias gms='git merge --squash'
+alias gp='git push'
+alias gpd='git push --dry-run'
+alias gpf!='git push --force'
+git_version="${${(s: :)$(command git version 2>/dev/null)}[3]}"
+if [[ -n "$git_version" ]] && is-at-least 2.30 "$git_version"; then
+	alias gpf='git push --force-with-lease --force-if-includes'
+else
+	alias gpf='git push --force-with-lease'
+fi
+alias gfp='gpf'
+alias gpoat='git push origin --all && git push origin --tags'
+alias gpod='git push origin --delete'
+alias gpr='git pull --rebase'
+alias gprv='git pull --rebase -v'
+alias gpra='git pull --rebase --autostash'
+alias gprav='git pull --rebase --autostash -v'
+alias gprom='git pull --rebase origin $(git_main_branch)'
+alias gpromi='git pull --rebase=interactive origin $(git_main_branch)'
+alias gprum='git pull --rebase upstream $(git_main_branch)'
+alias gprumi='git pull --rebase=interactive upstream $(git_main_branch)'
+alias gpsup='git push --set-upstream origin $(git_current_branch)'
+alias gpsupf='git push --set-upstream origin $(git_current_branch) --force-with-lease'
+alias gr='git remote'
+alias gra='git remote add'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbd='git rebase $(git_develop_branch)'
+alias grbi='git rebase --interactive'
+alias grbm='git rebase $(git_main_branch)'
+alias grbo='git rebase --onto'
+alias grbs='git rebase --skip'
+alias grf='git reflog'
+alias grh='git reset'
+alias grhh='git reset --hard'
+alias grhk='git reset --keep'
+alias grhs='git reset --soft'
+alias grm='git rm'
+alias grmc='git rm --cached'
+alias grmv='git remote rename'
+alias grrm='git remote remove'
+alias grset='git remote set-url'
+alias grup='git remote update'
+alias grs='git restore'
+alias grss='git restore --source'
+alias grst='git restore --staged'
+alias grev='git revert'
+alias greva='git revert --abort'
+alias grevc='git revert --continue'
+alias gsb='git status --short --branch'
+alias gsd='git svn dcommit'
+alias gsh='git show'
+alias gst='git status'
+alias gsta='git stash push'
+alias gstaa='git stash apply'
+alias gstc='git stash clear'
+alias gstd='git stash drop'
+alias gstl='git stash list'
+alias gstp='git stash pop'
+alias gsts='git stash show --patch'
+alias gss='git status --short'
+alias gstall='git stash --all'
+alias gstu='git stash --include-untracked'
+alias gsu='git submodule update'
+alias gsi='git submodule init'
+alias gtv='git tag | sort -V'
+alias gts='git tag --sign'
+alias gta='git tag --annotate'
+alias gwt='git worktree'
+alias gwta='git worktree add'
+alias gwtls='git worktree list'
+alias gwtmv='git worktree move'
+alias gwtrm='git worktree remove'
+alias gcl='git clone --recurse-submodules'
+alias gcount='git shortlog --summary --numbered'
+alias gsh='git show'
+alias gkeep='git stash push --keep-index'
+alias gsl='git shortlog'
