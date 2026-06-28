@@ -3,6 +3,11 @@ export HOMEBREW_AUTO_UPDATE_SECS="86400"
 autoload -Uz compinit
 compinit
 
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
+
 for file in ~/.zsh_includes.d/*; do
     source "$file"
 done
