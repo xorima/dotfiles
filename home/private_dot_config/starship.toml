@@ -2,12 +2,12 @@ add_newline = false
 command_timeout = 1000
 
 format = """
-$directory$git_branch$git_status$python$golang$java$kotlin$kubernetes$terraform$fill
+$directory$git_branch$git_status$python$golang$node$java$kotlin$kubernetes$terraform$fill
 $line_break$status$character
 """
 
 # move the rest of the prompt to the right
-right_format = """$docker_context$memory_usage$cmd_duration"""
+right_format = """$sudo$docker_context$memory_usage$cmd_duration"""
 
 [fill]
 symbol = ""
@@ -77,3 +77,8 @@ disabled = false
 disabled = false
 threshold = 90
 style = 'bold dimmed green'
+
+[sudo]
+style = 'bold green'
+symbol = '👩‍💻 '
+disabled = false
